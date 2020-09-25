@@ -49,7 +49,7 @@ def add_student_to_classroom(student: Dict, classroom: Dict):
         student: Student dict
         classroom: The classroom to add the student to
     """
-    pass
+    classroom["student_list"].append(student)
 
 
 def remove_student_from_classroom(student: Dict, classroom: Dict):
