@@ -75,6 +75,21 @@ def edit_student(student: Dict, **kwargs: Dict):
     return student
 
 
+
+print("====== Welcome To the Markbook ======")
+print("Command List")
+print("Enter 1 to add student")
+print("Enter 3 to remove student")
+def input_classroom():
+    print("Enter class details")
+    course_code = input("Enter course code: ")
+    course_name = input("Enter course name: ")
+    period = int(input("Enter period: "))
+    teacher_name = input("Enter teacher name: ")
+    classroom = create_classroom(course_code, course_name, period, teacher_name)
+    return classroom
+
+
 def create_options(option_dict : dict, indent : int, clear_page: bool): #Contribution log: Made by Patrick
   """Prints out a list of options depending on option_dict. Selecting an option will call a function.
 
