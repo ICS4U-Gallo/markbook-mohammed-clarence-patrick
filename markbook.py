@@ -95,12 +95,12 @@ def create_options(option_dict : dict, indent : int, clear_page: bool): #Contrib
 
     Args:
         option_dict: 
-            -option_dict's keys are the thing to be pressed to select an option. 
-            -The values are the functions that are called when an option is selected.
+            -option_dict's keys are the thing to be 'pressed' to select an option. 
+            -option_dict's values are the functions that are called when an option is selected.
         indent: 
             -The higher the number, the farther right everything will appear.
         clear_page:
-            -Will create_options clear the console before a function is being called?
+            -Will create_options clear the console before a function is called?
     """
   single_space = " " * indent
 
