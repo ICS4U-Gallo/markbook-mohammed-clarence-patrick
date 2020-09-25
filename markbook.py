@@ -74,3 +74,31 @@ def edit_student(student: Dict, **kwargs: Dict):
     student.update(**kwargs)
     return student
 
+
+def create_options(option_dict : dict, indent : int, clear_page: bool): #Contribution log: Made by Patrick
+  """Prints out a list of options depending on option_dict. Selecting an option will call a function.
+
+    Args:
+        option_dict: 
+            -option_dict's keys are the thing to be pressed to select an option. 
+            -The values are the functions that are called when an option is selected.
+        indent: 
+            -The higher the number, the farther right everything will appear.
+        clear_page:
+            -Will create_options clear the console before a function is being called?
+    """
+  single_space = " " * indent
+
+  print()
+  for keys, values in option_dict.items():
+    function_name = values.__name__.replace("_", " ")
+    print(f"{single_space}[{keys}]", {function_name})
+
+  user_choice = str(input(f"\n{single_space}Your choice: "))
+
+  try:
+    if clear_page:
+      os.system('clear')
+    return option_dict[user_choice]()
+  except:
+    return False
