@@ -15,7 +15,11 @@ def create_assignment(name: str, due: str, points: int) -> Dict:
     Returns:
         Assignment as a dictionary.
     """
-    return {}
+    assignment = {
+    "name" : name, 
+    "due" : due, 
+    "points" : points}           
+    return assignment
 
 
 def create_classroom(course_code: str, course_name: str, period: int, teacher: str) -> Dict:
@@ -25,7 +29,10 @@ def create_classroom(course_code: str, course_name: str, period: int, teacher: s
 
 def calculate_average_mark(student: Dict) -> float:
     """Calculates the average mark of a student"""
-    return 0
+    mark_sum = 0
+    for i in student["marks"]:
+      mark_sum += i
+    return mark_sum / len(student["marks"])
 
 
 def add_student_to_classroom(student: Dict, classroom: Dict):
