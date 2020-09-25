@@ -4,7 +4,7 @@ Group members:
 """
 from typing import Dict
 
-
+#API
 def create_assignment(name: str, due: str, points: int) -> Dict:
     """Creates an assignment represented as a dictionary
     
@@ -74,12 +74,32 @@ def edit_student(student: Dict, **kwargs: Dict):
     student.update(**kwargs)
     return student
 
+#UI
+def classes_page(class_list : list, indent : int, individual_class : Callable, add_class : Callable): #Contribution log: Made by Patrick
+  print("""
+  ====== Welcome To the Markbook ======
 
+  Classes:""")
 
-print("====== Welcome To the Markbook ======")
-print("Command List")
-print("Enter 1 to add student")
-print("Enter 3 to remove student")
+  class_option_indent = " " * indent
+
+  for i in range(len(class_list)):
+    print(f"\n{class_option_indent}[{i}]", {class_list[i]["course_name"]})
+  print(f"\n{class_option_indent}[{len(class_list)}]", "Add class")
+
+  user_choice = input(f"\n{class_option_indent}Your choice: ")
+
+  try:
+    os.system('clear')
+    user_choice = int(user_choice)
+    if user_choice == len(class_list):
+      return add_class()
+    return individual_class(*class_list[user_choice].values())
+  except:
+    print("INVALID OPTION")
+    classes_page(class_list, indent, individual_class, add_class)
+
+    
 def input_classroom():
     print("Enter class details")
     course_code = input("Enter course code: ")
@@ -90,30 +110,6 @@ def input_classroom():
     return classroom
 
 
-def create_options(option_dict : dict, indent : int, clear_page: bool): #Contribution log: Made by Patrick
-  """Prints out a list of options depending on option_dict. Selecting an option will call a function.
-
-    Args:
-        option_dict: 
-            -option_dict's keys are the thing to be 'pressed' to select an option. 
-            -option_dict's values are the functions that are called when an option is selected.
-        indent: 
-            -The higher the number, the farther right everything will appear.
-        clear_page:
-            -Will create_options clear the console before a function is called?
-    """
-  single_space = " " * indent
-
-  print()
-  for keys, values in option_dict.items():
-    function_name = values.__name__.replace("_", " ")
-    print(f"{single_space}[{keys}]", {function_name})
-
-  user_choice = str(input(f"\n{single_space}Your choice: "))
-
-  try:
-    if clear_page:
-      os.system('clear')
-    return option_dict[user_choice]()
-  except:
-    return False
+#print("Command List")
+#print("Enter 1 to add student")
+#print("Enter 3 to remove student")
