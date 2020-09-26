@@ -110,6 +110,25 @@ def input_classroom():
     return classroom
 
 
+def input_student():
+    print("Enter student details")  
+    first_name = input("Enter first name")
+    last_name = input("Enter last name")
+    gender = input("Enter gender")
+    image = input("Enter image")
+    student_number = input("Enter student number")
+    grade = int(input("Enter grade"))
+    email = input("Enter email")
+    numMarks = int(input("How many marks do you want to enter"))
+    marks = []
+    for i in range(numMarks):
+        mark = input("Enter marks: ")
+        marks.append(mark)
+    comments = input("Enter comments")
+    student = {"first_name": first_name, "last_name": last_name, "gender": gender, "image": image, "student_number": student_number, "grade": grade, "email": email, "marks": marks, "comments": comments}
+    return student
+
+
 #print("Command List")
 #print("Enter 1 to add student")
 #print("Enter 3 to remove student")
