@@ -151,6 +151,14 @@ def individual_class_page(
     return self_loc
 
 
+def individual_assignment():
+    name = input("Name of Assignment: ")
+    due_date = input("Due Date: ")
+    mark = float(input("Mark: "))
+    assignment = create_assignment(name, due_date, mark)
+    return assignment
+
+
 def input_student(back_loc : dict):
     print("Enter student details")  
     first_name = input("\nEnter first name: ")
@@ -167,6 +175,7 @@ def input_student(back_loc : dict):
     #comments = input("Enter comments: ")
     student = {"first_name": first_name, "last_name": last_name, "gender": gender}
     return student, back_loc
+
 
 
 while True: 
