@@ -4,6 +4,10 @@ Group members:
 """
 from typing import Dict
 
+#Variables:
+current_page = "classes_page"
+class_list = []
+
 #API
 def create_assignment(name: str, due: str, points: int) -> Dict:
     """Creates an assignment represented as a dictionary
@@ -32,6 +36,10 @@ def create_classroom(course_code: str, course_name: str, period: int, teacher: s
     "student_list" : [], 
     "assignment_list" : []}
     return classroom
+
+
+def remove_classroom(classroom : dict, class_list : list):
+  class_list.remove(classroom)
 
 
 def calculate_average_mark(student: Dict) -> float:
@@ -98,37 +106,93 @@ def classes_page(class_list : list, indent : int, individual_class : Callable, a
   except:
     print("INVALID OPTION")
     classes_page(class_list, indent, individual_class, add_class)
-
     
-def input_classroom():
+    
+def input_classroom(back_loc : str):
     print("Enter class details")
-    course_code = input("Enter course code: ")
+    course_code = input("\nEnter course code: ")
     course_name = input("Enter course name: ")
     period = int(input("Enter period: "))
     teacher_name = input("Enter teacher name: ")
     classroom = create_classroom(course_code, course_name, period, teacher_name)
-    return classroom
+    return classroom, back_loc
+
+    
+def individual_class_page(
+  class_list : list, 
+  class_dict : dict,
+  indent : int, 
+  page_travel_options : list,
+  page_travel_option_displayed : list): 
+  #Contribution log: Made by Patrick
+  class_option_indent = " " * indent
+
+  for key, value in class_dict.items():
+    data_container_name = key.replace("_", " ").title()
+    if type(value) is list:
+      display_list = []
+      for i in value:
+        simplified_dict_identifier = list(i.values())[0]
+        display_list.append(f"{simplified_dict_identifier}")
+      print(f"{class_option_indent}{data_container_name}: {display_list}")
+    else:
+      print(f"{class_option_indent}{data_container_name}: {value}")
+
+  for i in range(len(page_travel_options)):
+    specific_option_name = page_travel_option_displayed[i]
+    print(f"\n{class_option_indent}[{i}] {specific_option_name}")
+
+  user_choice = int(input(f"\n{class_option_indent}Your choice: "))
+
+  try:
+    return page_travel_options[user_choice]
+  except:
+    return self_loc
 
 
-def input_student():
+def input_student(back_loc : dict):
     print("Enter student details")  
-    first_name = input("Enter first name")
-    last_name = input("Enter last name")
-    gender = input("Enter gender")
-    image = input("Enter image")
-    student_number = input("Enter student number")
-    grade = int(input("Enter grade"))
-    email = input("Enter email")
-    numMarks = int(input("How many marks do you want to enter"))
+    first_name = input("\nEnter first name: ")
+    last_name = input("Enter last name: ")
+    gender = input("Enter gender: ")
+    student_number = input("Enter student number: ")
+    grade = int(input("Enter grade: "))
+    email = input("Enter email: ")
+    numMarks = int(input("How many marks do you want to enter: "))
     marks = []
     for i in range(numMarks):
         mark = input("Enter marks: ")
         marks.append(mark)
-    comments = input("Enter comments")
+    comments = input("Enter comments: ")
     student = {"first_name": first_name, "last_name": last_name, "gender": gender, "image": image, "student_number": student_number, "grade": grade, "email": email, "marks": marks, "comments": comments}
-    return student
+    return student, back_loc
 
 
-#print("Command List")
-#print("Enter 1 to add student")
-#print("Enter 3 to remove student")
+while True: 
+  os.system('clear')
+  if current_page == "classes_page":
+    current_page = classes_page(class_list, "add_class", "classes_page", 5)
+  elif current_page == "add_class":
+    adding_classroom = input_classroom("classes_page")
+    class_list.append(adding_classroom[0])
+    current_page = adding_classroom[1]
+  else:
+    for i in class_list:
+      if current_page == i:
+        current_page = individual_class_page(
+        class_list, i, 5,
+        ["classes_page", "edit_class", "remove_class", "add_student", "add_assignment"], 
+        ["Back", "Edit Class", "Remove Class", "Add Student", "Add Assignment"])
+      elif current_page == "edit_class":
+        adding_classroom = input_classroom(i)
+        i.update(adding_classroom[0])
+        current_page = adding_classroom[1]
+      elif current_page == "remove_class":
+        remove_classroom(i, class_list)
+        current_page = "classes_page"
+      elif current_page == "add_student":
+        adding_student = input_student(i)
+        add_student_to_classroom(adding_student[0], i)
+        current_page = adding_student[1]
+      elif current_page == "add_assignment":
+        pass
