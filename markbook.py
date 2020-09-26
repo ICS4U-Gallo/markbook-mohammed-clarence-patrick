@@ -1,8 +1,10 @@
 """
 Markbook Application
-Group members: 
+Group members: Patrick Wu, Clarence Corpuz, Mohammed Tarek 
 """
 from typing import Dict
+from typing import Callable
+import os
 
 #Variables:
 current_page = "classes_page"
@@ -10,21 +12,13 @@ class_list = []
 
 #API
 def create_assignment(name: str, due: str, points: int) -> Dict:
-    """Creates an assignment represented as a dictionary
-    
-    Args:
-        name: the name of the assignment.
-        due: the due date for the assignment.
-        points: what the assignment is out of (denominator).
-    Returns:
-        Assignment as a dictionary.
-    """
+    """Creates an assignment represented as a dictionary"""
     assignment = {
     "name" : name, 
     "due" : due, 
     "points" : points}           
     return assignment
-
+    
 
 def create_classroom(course_code: str, course_name: str, period: int, teacher: str) -> Dict:
     """Creates a classroom dictionary"""
@@ -58,6 +52,7 @@ def add_student_to_classroom(student: Dict, classroom: Dict):
         classroom: The classroom to add the student to
     """
     classroom["student_list"].append(student)
+    return classroom
 
 
 def remove_student_from_classroom(student: Dict, classroom: Dict):
@@ -66,7 +61,7 @@ def remove_student_from_classroom(student: Dict, classroom: Dict):
     Args:
         student: The student to be removed
         classroom: the class from which the student will be removed.
-    """
+    """   
     classroom["student_list"].remove(student)
 
 
@@ -74,7 +69,7 @@ def edit_student(student: Dict, **kwargs: Dict):
     """Edits the student's info with the provided key/value pairs
 
     Args:
-        student: The student whose data needs to be udated.
+        student: The student whose data needs to be updated.
         **kwargs: KeyWordARGumentS. The key/value pairs of the
             data that needs to be changed. Can come in the form
             of a dictionary.
@@ -82,8 +77,16 @@ def edit_student(student: Dict, **kwargs: Dict):
     student.update(**kwargs)
     return student
 
-#UI
-def classes_page(class_list : list, indent : int, individual_class : Callable, add_class : Callable): #Contribution log: Made by Patrick
+
+#User Interface
+
+
+def classes_page(
+  class_list : list, 
+  add_class_loc : str, 
+  self_loc : str, 
+  indent : int): 
+  #Contribution log: Made by Patrick
   print("""
   ====== Welcome To the Markbook ======
 
@@ -98,16 +101,14 @@ def classes_page(class_list : list, indent : int, individual_class : Callable, a
   user_choice = input(f"\n{class_option_indent}Your choice: ")
 
   try:
-    os.system('clear')
     user_choice = int(user_choice)
     if user_choice == len(class_list):
-      return add_class()
-    return individual_class(*class_list[user_choice].values())
+      return add_class_loc
+    return class_list[user_choice]
   except:
-    print("INVALID OPTION")
-    classes_page(class_list, indent, individual_class, add_class)
-    
-    
+    return self_loc
+
+
 def input_classroom(back_loc : str):
     print("Enter class details")
     course_code = input("\nEnter course code: ")
@@ -118,13 +119,6 @@ def input_classroom(back_loc : str):
     return classroom, back_loc
 
 
-def edit_classroom(classroom: Dict):
-    classroom["course_code"] = input("Edit course code")
-    classroom["course_name"] = input("Edit course name")
-    classroom["period"] = int(input("Edit period"))
-    classroom["teacher"] = input("Edit teacher")
-
-    
 def individual_class_page(
   class_list : list, 
   class_dict : dict,
@@ -162,22 +156,17 @@ def input_student(back_loc : dict):
     first_name = input("\nEnter first name: ")
     last_name = input("Enter last name: ")
     gender = input("Enter gender: ")
-    student_number = input("Enter student number: ")
-    grade = int(input("Enter grade: "))
-    email = input("Enter email: ")
-    numMarks = int(input("How many marks do you want to enter: "))
-    marks = []
-    for i in range(numMarks):
-        mark = input("Enter marks: ")
-        marks.append(mark)
-    comments = input("Enter comments: ")
-    student = {"first_name": first_name, "last_name": last_name, "gender": gender, "image": image, "student_number": student_number, "grade": grade, "email": email, "marks": marks, "comments": comments}
+    #student_number = input("Enter student number: ")
+    #grade = int(input("Enter grade: "))
+    #email = input("Enter email: ")
+    #numMarks = int(input("How many marks do you want to enter: "))
+    #marks = []
+    #for i in range(numMarks):
+        #mark = input("Enter marks: ")
+        #marks.append(mark)
+    #comments = input("Enter comments: ")
+    student = {"first_name": first_name, "last_name": last_name, "gender": gender}
     return student, back_loc
-
-
-def individual_student_page(student: Dict):
-    for key, value in student.items():
-        print(key + ": " + value)
 
 
 while True: 
