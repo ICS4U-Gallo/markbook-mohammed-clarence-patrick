@@ -117,6 +117,13 @@ def input_classroom(back_loc : str):
     classroom = create_classroom(course_code, course_name, period, teacher_name)
     return classroom, back_loc
 
+
+def edit_classroom(classroom: Dict):
+    classroom["course_code"] = input("Edit course code")
+    classroom["course_name"] = input("Edit course name")
+    classroom["period"] = int(input("Edit period"))
+    classroom["teacher"] = input("Edit teacher")
+
     
 def individual_class_page(
   class_list : list, 
@@ -166,6 +173,11 @@ def input_student(back_loc : dict):
     comments = input("Enter comments: ")
     student = {"first_name": first_name, "last_name": last_name, "gender": gender, "image": image, "student_number": student_number, "grade": grade, "email": email, "marks": marks, "comments": comments}
     return student, back_loc
+
+
+def individual_student_page(student: Dict):
+    for key, value in student.items():
+        print(key + ": " + value)
 
 
 while True: 
