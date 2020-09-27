@@ -9,6 +9,7 @@ import os
 #Variables:
 current_page = "classes_page"
 class_list = []
+assignments_list = []
 
 #API
 def create_assignment(name: str, due: str, points: int) -> Dict:
@@ -151,12 +152,41 @@ def individual_class_page(
     return self_loc
 
 
-def individual_assignment():
+def individual_assignment(assignments_list: list):
     name = input("Name of Assignment: ")
     due_date = input("Due Date: ")
-    mark = float(input("Mark: "))
+    mark = float(input("Points: "))
     assignment = create_assignment(name, due_date, mark)
-    return assignment
+    assignments_list.append(assignment)
+    for i in assignments_list:
+        for key, value in i.items():
+            print(key, ": " , value)
+    return assignments_list
+
+
+def assignment_page():
+    print("Assignment Page")
+    user = input("type 1 if create: ")
+    if user == "1":
+        individual_assignment(assignments_list)
+    elif user == "type 2 to edit: ":
+        edit_assignment(assignments_list)
+
+
+def edit_assignment(assignments_list: list):
+    user_input = input("Name of assignment you want to change: ")
+    for i in assignments_list:
+        for key, value in i.items():
+            if key == user_input:
+                name_change = input("Name Change: ") 
+                due_change = input("Due Date Change: ")
+                points_change = input("Points change: ")
+                assignment["name"] = name_change
+                assignment["due"] = due_change
+                assignment["points"] = points_change
+    return assignment_list
+
+
 
 
 def input_student(back_loc : dict):
