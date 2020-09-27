@@ -6,7 +6,7 @@ from typing import Dict, Callable
 import json
 
 
-def create_assignment(name: str, due: str, points: int) -> Dict:
+def create_assignment(name: str, due: str, points: int) -> Dict: #Clarence
     """Creates an assignment represented as a dictionary"""
     assignment = {
     "name" : name, 
@@ -15,7 +15,7 @@ def create_assignment(name: str, due: str, points: int) -> Dict:
     return assignment
 
 
-def add_assignment_to_classroom(assignment : dict, classroom : dict):
+def add_assignment_to_classroom(assignment : dict, classroom : dict): 
   """Adds assignment to a classroom
   Args:
       student: Assignment dict
@@ -42,7 +42,7 @@ def remove_classroom(classroom : dict, class_list : list):
   return class_list
 
 
-def add_student_to_classroom(student: Dict, classroom: Dict):
+def add_student_to_classroom(student: Dict, classroom: Dict): # Mohammad
     """Adds student to a classroom
     Args:
         student: Student dict
@@ -62,7 +62,7 @@ def remove_student_from_classroom(student: Dict, classroom: Dict):
     return classroom
 
 
-def edit_student(student: Dict, **kwargs: Dict):
+def edit_student(student: Dict, **kwargs: Dict): # Clarence
     """Edits the student's info with the provided key/value pairs
     Args:
         student: The student whose data needs to be updated.
@@ -82,7 +82,7 @@ def calculate_average_mark(student: Dict) -> float:
     return mark_sum / len(student["marks"])
 
 
-def load(filePath="database.json"):
+def load(filePath="database.json"): # Patrick
   with open(filePath, "r") as file:
     return json.loads(file.read())
 
