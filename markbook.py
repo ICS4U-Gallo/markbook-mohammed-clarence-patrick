@@ -1,3 +1,7 @@
+"""
+Markbook Application
+Group members: Patrick Wu, Clarence Corpuz, Mohammed Tarek 
+"""
 from typing import Dict, Callable
 import json
 
@@ -86,3 +90,4 @@ def load(filePath="database.json"):
 def save(due_to_save, filePath="database.json"):
   with open(filePath, "w") as file:
     file.write(json.dumps(due_to_save))
+
