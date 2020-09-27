@@ -158,9 +158,7 @@ def individual_assignment(assignments_list: list):
     mark = float(input("Points: "))
     assignment = create_assignment(name, due_date, mark)
     assignments_list.append(assignment)
-    for i in assignments_list:
-        for key, value in i.items():
-            print(key, ": " , value)
+    print("Added new assignment ->", assignment["name"])
     return assignments_list
 
 
