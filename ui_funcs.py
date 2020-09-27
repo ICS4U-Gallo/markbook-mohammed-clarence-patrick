@@ -1,7 +1,7 @@
 from typing import Dict, Callable
 from markbook import *
 
-
+# Patrick
 def generic_individual_page(
   comments : str,
   current_dict : dict,
@@ -66,8 +66,8 @@ def input_classroom(back_loc, updating : bool):
     classroom = create_classroom(course_code, course_name, period, teacher_name)
     return classroom, back_loc
 
-
-def input_assignment(back_loc, updating : bool):
+  # Clarence
+  def input_assignment(back_loc, updating : bool):
     if updating:
       print("Update assignment details")
     else:
@@ -78,7 +78,7 @@ def input_assignment(back_loc, updating : bool):
     assignment = create_assignment(name, due_date, mark)
     return assignment, back_loc
 
-
+# Mohammed
 def input_student(back_loc, updating : bool):
     if updating:
       print("Update student details")
