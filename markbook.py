@@ -9,7 +9,7 @@ import os
 #Variables:
 current_page = "classes_page"
 class_list = []
-assignments_list = []
+
 
 #API
 def create_assignment(name: str, due: str, points: int) -> Dict:
@@ -152,26 +152,26 @@ def individual_class_page(
     return self_loc
 
 
-def individual_assignment(assignments_list: list):
+def input_assignment(back_lot: dict):
     name = input("Name of Assignment: ")
     due_date = input("Due Date: ")
     mark = float(input("Points: "))
     assignment = create_assignment(name, due_date, mark)
-    assignments_list.append(assignment)
-    print("Added new assignment ->", assignment["name"])
-    return assignments_list
+    return assignment, back_lot
 
 
-def assignment_page():
-    print("Assignment Page")
-    user = input("type 1 if create: ")
-    if user == "1":
-        individual_assignment(assignments_list)
-    elif user == "type 2 to edit: ":
-        edit_assignment(assignments_list)
+def add_assignment_to_classroom(assignment: Dict, classroom: Dict):
+    """Adds assignment to a classroom
+
+    Args:
+        assignment: assignment dict
+        classroom: The classroom to add the assignment to
+    """
+    classroom["assignment_list"].append(assignment)
+    return classroom
 
 
-def edit_assignment(assignments_list: list):
+def edit_assignment(assignment: dict):
     user_input = input("Name of assignment you want to change: ")
     for i in assignments_list:
         for key, value in i.items():
@@ -182,9 +182,7 @@ def edit_assignment(assignments_list: list):
                 assignment["name"] = name_change
                 assignment["due"] = due_change
                 assignment["points"] = points_change
-    return assignment_list
-
-
+    return assignment
 
 
 def input_student(back_loc : dict):
@@ -218,9 +216,9 @@ while True:
     for i in class_list:
       if current_page == i:
         current_page = individual_class_page(
-        class_list, i, 5,
-        ["classes_page", "edit_class", "remove_class", "add_student", "add_assignment"], 
-        ["Back", "Edit Class", "Remove Class", "Add Student", "Add Assignment"])
+        class_list, i, 6,
+        ["classes_page", "edit_class", "remove_class", "add_student", "add_assignment", "edit_assignment"], 
+        ["Back", "Edit Class", "Remove Class", "Add Student", "Add Assignment", "Edit Assignment"])
       elif current_page == "edit_class":
         adding_classroom = input_classroom(i)
         i.update(adding_classroom[0])
@@ -233,4 +231,9 @@ while True:
         add_student_to_classroom(adding_student[0], i)
         current_page = adding_student[1]
       elif current_page == "add_assignment":
+        adding_assignment = input_assignment(i)
+        add_assignment_to_classroom(adding_assignment[0], i)
+        current_page = adding_assignment[1]
+      elif current_page == "edit_assignment":
         pass
+        
