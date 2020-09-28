@@ -1,64 +1,63 @@
 from typing import Dict, Callable
 from markbook import *
 
-# Patrick
-def generic_individual_page(
-  comments : str,
-  current_dict : dict,
-  indent : int, 
-  dict_display : int,
-  functional_lists : bool,
-  page_travel_options : list,
-  page_travel_option_displayed : list): 
-  #Contribution log: Made by Patrick
-  class_option_indent = " " * indent
-  current_number_of_options = -1
-  generated_options = []
 
-  print(f"{comments}\n")
+def generic_individual_page(            # Patrick
+                            comments: str,
+                            current_dict: dict,
+                            indent: int,
+                            dict_display: int,
+                            functional_lists: bool,
+                            page_travel_options: list,
+                            page_travel_option_displayed: list):
+    class_option_indent = " " * indent
+    current_number_of_options = -1
+    generated_options = []
 
-  for key, value in current_dict.items():
-    data_container_name = key.replace("_", " ").title()
+    print(f"{comments}\n")
 
-    if type(value) is list:
-      print(f"{class_option_indent}{data_container_name}:")
+    for key, value in current_dict.items():
+        data_container_name = key.replace("_", " ").title()
 
-      for i in range(len(value)):
-        list_options_display = ""
+        if type(value) is list:
+            print(f"{class_option_indent}{data_container_name}:")
 
-        if functional_lists:
-          dict_display_temp = len(list(value[i].values())) if dict_display > len(list(value[i].values())) else dict_display
+            for i in range(len(value)):
+                list_options_display = ""
 
-          for i2 in range(dict_display_temp):
-            list_options_display += f"{list(value[i].values())[i2]} | "
-          current_number_of_options += 1
-          generated_options.append(value[i])
-          print(f"{class_option_indent*2}{[current_number_of_options]} {list_options_display}")
+                if functional_lists:
+                    dict_display_temp = len(list(value[i].values())) if dict_display > len(list(value[i].values())) else dict_display
+
+                    for i2 in range(dict_display_temp):
+                        list_options_display += f"{list(value[i].values())[i2]} | "
+                    current_number_of_options += 1
+                    generated_options.append(value[i])
+                    print(f"{class_option_indent*2}{[current_number_of_options]} {list_options_display}")
+                else:
+                    list_options_display = value[i]
+                    print(f"{class_option_indent*2}{list_options_display}")
         else:
-          list_options_display = value[i]
-          print(f"{class_option_indent*2}{list_options_display}")
-    else:
-      print(f"{class_option_indent}{data_container_name}: {value}")
+            print(f"{class_option_indent}{data_container_name}: {value}")
 
-  for i in range(len(page_travel_options)):
-    current_number_of_options += 1
-    specific_option_name = page_travel_option_displayed[i]
-    print(f"\n{class_option_indent}[{current_number_of_options}] {specific_option_name}")
+    for i in range(len(page_travel_options)):
+        current_number_of_options += 1
+        specific_option_name = page_travel_option_displayed[i]
+        print(f"\n{class_option_indent}[{current_number_of_options}] {specific_option_name}")
 
-  user_choice = int(input(f"\n{class_option_indent}Select an option between 0 and {current_number_of_options}: "))
+    user_choice = int(input(f"\n{class_option_indent}Select an option between 0 and {current_number_of_options}: "))
 
-  try:
-    user_choice_page_travel = user_choice - (current_number_of_options - len(page_travel_options) + 1)
-    return page_travel_options[user_choice_page_travel] if user_choice > len(generated_options) - 1 else generated_options[user_choice]
-  except:
-    return current_dict
+    try:
+        user_choice_page_travel = user_choice - (current_number_of_options - len(page_travel_options) + 1)
+        return page_travel_options[user_choice_page_travel] if user_choice > len(generated_options) - 1 else generated_options[user_choice]
+    except:
+        return current_dict
 
 
-def input_classroom(back_loc, updating : bool):
+def input_classroom(back_loc, updating: bool):
     if updating:
-      print("Update class details")
+        print("Update class details")
     else:
-      print("Enter class details")
+        print("Enter class details")
     course_code = input("\nEnter Course Code: ")
     course_name = input("Enter Course Name: ")
     period = int(input("Enter Period: "))
@@ -66,27 +65,27 @@ def input_classroom(back_loc, updating : bool):
     classroom = create_classroom(course_code, course_name, period, teacher_name)
     return classroom, back_loc
 
-  # Clarence
-def input_assignment(back_loc, updating : bool):
+
+def input_assignment(back_loc, updating: bool):  # Clarence
     if updating:
-      print("Update assignment details")
+        print("Update assignment details")
     else:
-      print("Enter assignment details")
+        print("Enter assignment details")
     name = input("\nName of Assignment: ")
     due_date = input("Due Date: ")
     mark = float(input("Mark: "))
     assignment = create_assignment(name, due_date, mark)
     return assignment, back_loc
 
-# Mohammed
-def input_student(back_loc, updating : bool):
+
+def input_student(back_loc, updating: bool):     # Mohammed
     if updating:
-      print("Update student details")
+        print("Update student details")
     else:
-      print("Enter student details")
+        print("Enter student details")
     first_name = input("\nEnter First Name: ")
     last_name = input("Enter Last Name: ")
-    student_number = input("Enter Student Number: ") 
+    student_number = input("Enter Student Number: ")
     gender = input("Enter Gender: ")
     grade = int(input("Enter Grade: "))
     email = input("Enter Email: ")
@@ -97,8 +96,8 @@ def input_student(back_loc, updating : bool):
         marks.append(mark)
     comments = input("Enter Comments: ")
     student = {
-    "first_name": first_name, "last_name": last_name, 
-    "gender": gender, "student_number" : student_number, 
-    "grade" : grade, "email" : email,
-    "marks" : marks, "comments" : comments}
+            "first_name": first_name, "last_name": last_name,
+            "gender": gender, "student_number": student_number,
+            "grade": grade, "email": email,
+            "marks": marks, "comments": comments}
     return student, back_loc
