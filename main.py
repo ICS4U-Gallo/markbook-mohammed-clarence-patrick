@@ -39,8 +39,8 @@ def main(current_page, class_list : list):
           current_page = generic_individual_page(
           "===  Classroom  ===",
           i, 5, 4, True,
-          ["classes_page", "edit_class", "remove_class", "add_student", "add_assignment"], 
-          ["Back", "Edit class", "Remove class", "Add student", "Add assignment"])
+          ["classes_page", "edit_class", "remove_class", "add_student", "add_assignment", "report_card"], 
+          ["Back", "Edit class", "Remove class", "Add student", "Add assignment", "Report Card"])
         elif current_page == "edit_class":
           editing_classroom = input_classroom(i, True)
           i.update(editing_classroom[0])
@@ -56,6 +56,12 @@ def main(current_page, class_list : list):
           adding_assignment = input_assignment(i, False)
           add_assignment_to_classroom(adding_assignment[0], i)
           current_page = adding_assignment[1]
+        elif current_page == "report_card":
+          current_page = generic_individual_page(
+          "===  Report Card  ===", 
+          {"Class Averages" : report_card(i["student_list"], True)}, 5, 4, False,
+          [i], 
+          ["Back"])
         else:
           os.system('clear')
           for i2 in i["assignment_list"]:
