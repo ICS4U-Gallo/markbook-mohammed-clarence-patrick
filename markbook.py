@@ -1,45 +1,45 @@
 """
 Markbook Application
-Group members: Patrick Wu, Clarence Corpuz, Mohammed Tarek 
-"""
+Group members: Patrick Wu, Clarence Corpuz, Mohammed Tarek """
 from typing import Dict, Callable
 import json
 
 
-def create_assignment(name: str, due: str, points: int) -> Dict:        #Clarence
+# Clarence
+def create_assignment(name: str, due: str, points: int) -> Dict:
     """Creates an assignment represented as a dictionary"""
     assignment = {
-    "name" : name, 
-    "due" : due, 
-    "points" : points}           
+        "name": name,
+        "due": due,
+        "points": points}
     return assignment
 
 
-def add_assignment_to_classroom(assignment : dict, classroom : dict): 
-  """Adds assignment to a classroom
-  Args:
-      student: Assignment dict
-      classroom: The classroom to add the student to
+def add_assignment_to_classroom(assignment: dict, classroom: dict):
+    """Adds assignment to a classroom
+    Args:
+        student: Assignment dict
+        classroom: The classroom to add the student to
   """
-  classroom["assignment_list"].append(assignment)
-  return classroom
-    
+    classroom["assignment_list"].append(assignment)
+    return classroom
+
 
 def create_classroom(course_code: str, course_name: str, period: int, teacher: str) -> Dict:
     """Creates a classroom dictionary"""
     classroom = {
-    "course_code" : course_code,
-    "course_name" : course_name,
-    "period" : period,
-    "teacher" : teacher,
-    "student_list" : [], 
-    "assignment_list" : []}
+        "course_code": course_code,
+        "course_name": course_name,
+        "period": period,
+        "teacher": teacher,
+        "student_list": [],
+        "assignment_list": []}
     return classroom
 
 
-def remove_classroom(classroom : dict, class_list : list):
-  class_list.remove(classroom)
-  return class_list
+def remove_classroom(classroom: dict, class_list: list):
+    class_list.remove(classroom)
+    return class_list
 
 
 def add_student_to_classroom(student: Dict, classroom: Dict):       # Mohammad
@@ -57,7 +57,7 @@ def remove_student_from_classroom(student: Dict, classroom: Dict):
     Args:
         student: The student to be removed
         classroom: the class from which the student will be removed.
-    """   
+    """
     classroom["student_list"].remove(student)
     return classroom
 
@@ -78,17 +78,17 @@ def calculate_average_mark(student: Dict) -> float:
     """Calculates the average mark of a student"""
     mark_sum = 0
     for i in student["marks"]:
-      mark_sum += i
+        mark_sum += i
     return mark_sum / len(student["marks"])
 
 
 def report_card(student_list: list, order_greatest: bool):
     marks_list = []
     for student in student_list:
-        average = calculate_average_mark(student) 
+        average = calculate_average_mark(student)
         student_first_name = student["first_name"]
         student_last_name = student["last_name"]
-        student_and_mark = f"{student_first_name} {student_last_name} | {average} |"        
+        student_and_mark = f"{student_first_name} {student_last_name} | {average} |"
         marks_list.append(student_and_mark)
     if order_greatest:
         marks_list = sorted(marks_list, reverse=True)
@@ -97,12 +97,11 @@ def report_card(student_list: list, order_greatest: bool):
         return marks_list
 
 
-def load(filePath="database.json"): # Patrick
-  with open(filePath, "r") as file:
-    return json.loads(file.read())
+def load(filePath="database.json"):  # Patrick
+    with open(filePath, "r") as file:
+        return json.loads(file.read())
 
 
 def save(due_to_save, filePath="database.json"):
-  with open(filePath, "w") as file:
-    file.write(json.dumps(due_to_save))
-
+    with open(filePath, "w") as file:
+        file.write(json.dumps(due_to_save))
