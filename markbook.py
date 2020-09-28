@@ -6,7 +6,7 @@ from typing import Dict, Callable
 import json
 
 
-def create_assignment(name: str, due: str, points: int) -> Dict: #Clarence
+def create_assignment(name: str, due: str, points: int) -> Dict:        #Clarence
     """Creates an assignment represented as a dictionary"""
     assignment = {
     "name" : name, 
@@ -42,7 +42,7 @@ def remove_classroom(classroom : dict, class_list : list):
   return class_list
 
 
-def add_student_to_classroom(student: Dict, classroom: Dict): # Mohammad
+def add_student_to_classroom(student: Dict, classroom: Dict):       # Mohammad
     """Adds student to a classroom
     Args:
         student: Student dict
@@ -62,7 +62,7 @@ def remove_student_from_classroom(student: Dict, classroom: Dict):
     return classroom
 
 
-def edit_student(student: Dict, **kwargs: Dict): # Clarence
+def edit_student(student: Dict, **kwargs: Dict):        # Clarence
     """Edits the student's info with the provided key/value pairs
     Args:
         student: The student whose data needs to be updated.
@@ -82,6 +82,18 @@ def calculate_average_mark(student: Dict) -> float:
     return mark_sum / len(student["marks"])
 
 
+def report_card(student_list: list, order_greatest: bool):
+    marks_list = []
+    for student in student_list:
+        average = calculate_average_mark(student) 
+        marks_list.append(average)
+    if order_greatest:
+        marks_list = sorted(marks_list, reverse=True)
+        return marks_list
+    else:
+        return marks_list
+
+    
 def load(filePath="database.json"): # Patrick
   with open(filePath, "r") as file:
     return json.loads(file.read())
