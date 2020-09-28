@@ -86,14 +86,17 @@ def report_card(student_list: list, order_greatest: bool):
     marks_list = []
     for student in student_list:
         average = calculate_average_mark(student) 
-        marks_list.append(average)
+        student_first_name = student["first_name"]
+        student_last_name = student["last_name"]
+        student_and_mark = f"{student_first_name} {student_last_name} | {average} |"        
+        marks_list.append(student_and_mark)
     if order_greatest:
         marks_list = sorted(marks_list, reverse=True)
         return marks_list
     else:
         return marks_list
 
-    
+
 def load(filePath="database.json"): # Patrick
   with open(filePath, "r") as file:
     return json.loads(file.read())
