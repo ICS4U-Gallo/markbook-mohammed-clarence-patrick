@@ -67,7 +67,7 @@ def input_classroom(back_loc, updating : bool):
     return classroom, back_loc
 
   # Clarence
-  def input_assignment(back_loc, updating : bool):
+def input_assignment(back_loc, updating : bool):
     if updating:
       print("Update assignment details")
     else:
