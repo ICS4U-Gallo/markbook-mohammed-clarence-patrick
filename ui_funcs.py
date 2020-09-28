@@ -93,7 +93,7 @@ def input_student(back_loc, updating : bool):
     numMarks = int(input("Number of Marks: "))
     marks = []
     for i in range(numMarks):
-        mark = input(f"Enter Mark {i + 1}: ")
+        mark = int(input(f"Enter Mark {i + 1}: "))
         marks.append(mark)
     comments = input("Enter Comments: ")
     student = {
