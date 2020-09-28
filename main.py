@@ -6,7 +6,7 @@ from markbook import *
 import os
 
 
-current_page = "classes_page"       # Patrick
+current_page = "classes_page" 
 try:
     class_list = list(load())
 except:
@@ -14,6 +14,7 @@ except:
     save(class_list)
 
 
+# Made by Patrick (approx 70% - 80% of main), Clarence (report card section), and Mohammed (student section of main)
 def main(current_page, class_list: list):
     while True:
         os.system('clear')
@@ -50,11 +51,11 @@ def main(current_page, class_list: list):
                     adding_student = input_student(i, False)
                     add_student_to_classroom(adding_student[0], i)
                     current_page = adding_student[1]
-                elif current_page == "add_assignment":               # Clarence and Patrick
+                elif current_page == "add_assignment":               
                     adding_assignment = input_assignment(i, False)
                     add_assignment_to_classroom(adding_assignment[0], i)
                     current_page = adding_assignment[1]
-                elif current_page == "report_card":
+                elif current_page == "report_card": # Clarence and Patrick (report card)
                     current_page = generic_individual_page(
                         "===  Report Card  ===",
                         {"Class Averages": report_card(i["student_list"], True)}, 5, 4, False,
@@ -73,8 +74,8 @@ def main(current_page, class_list: list):
                             updating_assignment = input_assignment(i, True)
                             i2.update(updating_assignment[0])
                             current_page = updating_assignment[1]
-                    os.system('clear')                              # Mohammed and Patrick
-                    for i2 in i["student_list"]:
+                    os.system('clear')                              
+                    for i2 in i["student_list"]: # Mohammed and Patrick (student section)
                         if current_page == i2:
                             current_page = generic_individual_page(
                                 "===  Assignment  ===",

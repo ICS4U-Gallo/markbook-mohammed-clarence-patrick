@@ -5,7 +5,7 @@ from typing import Dict, Callable
 import json
 
 
-# Clarence
+# Made by Clarence
 def create_assignment(name: str, due: str, points: int) -> Dict:
     """Creates an assignment represented as a dictionary"""
     assignment = {
@@ -15,6 +15,7 @@ def create_assignment(name: str, due: str, points: int) -> Dict:
     return assignment
 
 
+# Made by Clarence
 def add_assignment_to_classroom(assignment: dict, classroom: dict):
     """Adds assignment to a classroom
     Args:
@@ -25,6 +26,7 @@ def add_assignment_to_classroom(assignment: dict, classroom: dict):
     return classroom
 
 
+# Made by Patrick
 def create_classroom(course_code: str, course_name: str, period: int, teacher: str) -> Dict:
     """Creates a classroom dictionary"""
     classroom = {
@@ -37,12 +39,14 @@ def create_classroom(course_code: str, course_name: str, period: int, teacher: s
     return classroom
 
 
+# Made by Patrick
 def remove_classroom(classroom: dict, class_list: list):
     class_list.remove(classroom)
     return class_list
 
 
-def add_student_to_classroom(student: Dict, classroom: Dict):       # Mohammad
+# Made by Mohammed
+def add_student_to_classroom(student: Dict, classroom: Dict):       
     """Adds student to a classroom
     Args:
         student: Student dict
@@ -52,6 +56,7 @@ def add_student_to_classroom(student: Dict, classroom: Dict):       # Mohammad
     return classroom
 
 
+# Made by Mohammed
 def remove_student_from_classroom(student: Dict, classroom: Dict):
     """Removes student from classroom
     Args:
@@ -62,7 +67,8 @@ def remove_student_from_classroom(student: Dict, classroom: Dict):
     return classroom
 
 
-def edit_student(student: Dict, **kwargs: Dict):        # Clarence
+# Made by Mohammed
+def edit_student(student: Dict, **kwargs: Dict):        
     """Edits the student's info with the provided key/value pairs
     Args:
         student: The student whose data needs to be updated.
@@ -74,6 +80,7 @@ def edit_student(student: Dict, **kwargs: Dict):        # Clarence
     return student
 
 
+# Made by Mohammed
 def calculate_average_mark(student: Dict) -> float:
     """Calculates the average mark of a student"""
     mark_sum = 0
@@ -82,6 +89,7 @@ def calculate_average_mark(student: Dict) -> float:
     return mark_sum / len(student["marks"])
 
 
+# Made by Clarence
 def report_card(student_list: list, order_greatest: bool):
     marks_list = []
     for student in student_list:
@@ -97,11 +105,13 @@ def report_card(student_list: list, order_greatest: bool):
         return marks_list
 
 
-def load(filePath="database.json"):  # Patrick
-    with open(filePath, "r") as file:
+# Made by Patrick
+def load(file_path="database.json"): 
+    with open(file_path, "r") as file:
         return json.loads(file.read())
 
 
-def save(due_to_save, filePath="database.json"):
-    with open(filePath, "w") as file:
+# Made by Patrick
+def save(due_to_save, file_path="database.json"):
+    with open(file_path, "w") as file:
         file.write(json.dumps(due_to_save))
