@@ -7,7 +7,7 @@ from markbook import *
 import os
 
 
-current_page = "classes_page"
+current_page = "classes_page"       #Patrick
 try:
   class_list = list(load())
 except:
@@ -52,7 +52,7 @@ def main(current_page, class_list : list):
           adding_student = input_student(i, False)
           add_student_to_classroom(adding_student[0], i)
           current_page = adding_student[1]
-        elif current_page == "add_assignment":
+        elif current_page == "add_assignment":            #Clarence
           adding_assignment = input_assignment(i, False)
           add_assignment_to_classroom(adding_assignment[0], i)
           current_page = adding_assignment[1]
